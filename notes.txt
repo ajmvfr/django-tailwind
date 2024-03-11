@@ -1,0 +1,148 @@
+create vitual enviroment
+    py -3 -m venv venv
+
+create project
+    saved the workspace.  I'm not sure what this does yet.
+    create directory
+    create venv: py -3 -m venv venv
+    .\venv\Scripts\activate.bat
+    pip install django
+    pip install django-countries
+    pip install pillow
+    pip install qrcode
+    pip install -r requirements.txt
+    django-admin startproject core .    --the . says use current dir.  This allows us to not have the second dir like the default
+    
+script for command terminal line to attach to virtuall enviroment
+    .\venv\Scripts\activate.bat
+
+deactivate virtual enviroment
+    deactivate
+
+to start webserver
+    python manage.py runserver
+
+first step is to create api part of the poject
+    python manage.py startapp authors
+    python manage.py startapp publishers
+    python manage.py startapp books
+    python manage.py startapp customers
+    python manage.py startapp rentals
+
+Buid reqirements.txt first then add all initial components
+    pip install -r requirements.txt
+
+to make migrations for table
+    python manage.py makemigrations
+
+apply change to DB
+    python manage.py migrate
+
+create user for apply
+    python manage.py createsuperuser
+    for dev use
+    email: ajmvfr@gmail.com
+    user: ajmvfr
+    pw: !a1s2d3f4
+
+setup git hub
+    git init
+    git add --all
+    git commit -m "First Commit"
+    git remote add origin https://github.com/ajmvfr/MasonicLodgeSolutions-Django.git  -- To put in git also
+    git push origin main -- push to Github Master branch
+    
+Generate secret key site
+    https://djecrety.ir/
+
+Django to check for production ready
+    https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+    manage.py check --deploy
+
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+===========================================================================
+
+
+rest api aut setup  
+    add     'rest_framework.authtoken', to setting application
+    run python manage.py migrate
+
+python/django shell for adding records
+    python manage.py shell
+    from products.models import Product
+    Product.objects.create(title='Hello World',content='this is amazing!',price=0.00)
+    Product.objects.create(title='Hello World again',content='this is amazing!',price=12.00)
+    query random product
+        Product.objects.all().order_by("?").first()
+
+
+look at libraries installed
+    pip list
+  or 
+    pip freeze
+    pip install -r requirements.txt
+
+install django
+    pip install django
+    pip install psycopg2
+
+
+
+
+create user for apply
+    python manage.py createsuperuser
+    for dev use
+    user: admin
+    pw: admin
+    email: ajmvfr@gmail.com
+
+first step is to create the main page
+    python manage.py startapp main
+
+
+setup for heroku
+    setup gunicorn
+        pip install gunicorn
+    create profile file
+        create file "Procfile"
+        load "web: gunicorn pizzamama.wsgi" into it
+    install heroku manager
+
+
+setup git hub
+    git init
+    git add --all
+    git commit -m "first version of the projet"
+         git remote add origin https://github.com/ajmvfr/MasonicDistrict37Web.git  -- To put in git also
+    --------------not used-----------git remote add heroku https://git.heroku.com/ajmpizzamamadjango.git   
+    git push origin master -- push to Github Master branch
+    git push heroku master -- push to Heroku
+
+https://ajmpizzamamadjango-62baa4e4b6da.herokuapp.com/
+https://git.heroku.com/ajmpizzamamadjango.git
+
+
+heroku create ajmpizzamamadjango
+
+
+python manage.py createsuperuser
+
+heroku run python manage.py makemigrations --app ajmpizzamamadjango
+heroku run python manage.py migrate --app ajmpizzamamadjango
+heroku run python manage.py createsuperuser --app ajmpizzamamadjango
+
+
+install environ 
+    pip install django-environ
+    
+
+railray deploy
+        python manage.py collectstatic

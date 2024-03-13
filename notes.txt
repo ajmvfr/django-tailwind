@@ -49,8 +49,9 @@ setup git hub
     git init
     git add --all
     git commit -m "First Commit"
-    git remote add origin https://github.com/ajmvfr/MasonicLodgeSolutions-Django.git  -- To put in git also
-    git push origin main -- push to Github Master branch
+    git branch -M main
+    git remote add origin https://github.com/ajmvfr/django-tailwind.git  -- To put in git also
+    git push origin master -- push to Github Master branch
     
 Generate secret key site
     https://djecrety.ir/

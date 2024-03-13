@@ -3,6 +3,7 @@ from publishers.models import Publisher
 from authors.models import Author
 from django.utils.text import slugify
 import uuid
+from django.urls import reverse
 #import for qrcode generation
 import qrcode 
 from io import BytesIO
@@ -17,6 +18,19 @@ class BookTitle(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    @property  #makes books method treated as a property
+    def books(self):
+        return self.book_set.all()
+    
+    # above is better
+    # this is a way of making a method
+    # def get_books(self):
+    #     return self.book_set.all()
+    
+    def get_absolute_url(self):
+        return reverse("books:detail", kwargs={"pk": self.pk})
+
     
     def __str__(self):
         return f"Book position: {self.title}"

@@ -2,17 +2,18 @@ from django.db import models
 from books.models import Book
 from customers.models import Customer
 from datetime import timedelta
+from .choices import STATUS_CHOICES
 
-STATUS_CHOICES = (
-    ('#0','rented'),
-    ('#1','returned'),
-    ('#2','lost'),
-    ('#3','delayed'),
-)
+# STATUS_CHOICES = (
+#     ('#0','rented'),
+#     ('#1','returned'),
+#     ('#2','lost'),
+#     ('#3','delayed'),
+# )
 
 
 class Rental(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='books')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE) #, related_name='books'   was conflicting so I removed it
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     status = models.CharField(max_length=2, choices=STATUS_CHOICES)
     rent_start_date = models.DateField(help_text='when the book was rented')
@@ -30,3 +31,6 @@ class Rental(models.Model):
             self.rent_end_date = self.rent_start_date + timedelta(days=14)
         
         super().save(*args, **kwargs)
+        
+    class Meta:
+        ordering = ('-created',)  #this created a default decending return

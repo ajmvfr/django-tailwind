@@ -9,6 +9,9 @@ import qrcode
 from io import BytesIO
 from django.core.files import File
 from PIL import Image
+from rentals.choices import STATUS_CHOICES
+
+
 
 
 class BookTitle(models.Model):
@@ -50,6 +53,13 @@ class Book(models.Model):
     
     def __str__(self):
         return str(self.title)
+    
+    @property
+    def status(self):
+        if len(self.rental_set.all()) > 0:
+            statuses = dict(STATUS_CHOICES)
+            return statuses[self.rental_set.first().status] #the will be the most recent since the default sort order
+        return False
     
     def save(self, *args, **kwargs):
         if not self.isbn:

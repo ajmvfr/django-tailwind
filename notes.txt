@@ -10,6 +10,7 @@ create project
     pip install django-countries
     pip install pillow
     pip install qrcode
+    pip install django-import-export
     pip install -r requirements.txt
     django-admin startproject core .    --the . says use current dir.  This allows us to not have the second dir like the default
     

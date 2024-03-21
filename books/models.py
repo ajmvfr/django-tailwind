@@ -12,8 +12,6 @@ from PIL import Image
 from rentals.choices import STATUS_CHOICES
 
 
-
-
 class BookTitle(models.Model):
     title = models.CharField(max_length=299, unique=True)
     slug = models.SlugField(blank=True) # slug replaces spaces with dash
@@ -32,7 +30,8 @@ class BookTitle(models.Model):
     #     return self.book_set.all()
     
     def get_absolute_url(self):
-        return reverse("books:detail", kwargs={"pk": self.pk})
+        letter = self.title[:1].lower()
+        return reverse("books:detail", kwargs={"letter": letter, "slug": self.slug})
 
     
     def __str__(self):
@@ -50,6 +49,14 @@ class Book(models.Model):
     qr_code = models.ImageField(upload_to='qr_codes', blank=True, null=True)  # uploads_to specifies the class
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        letter = self.title.title[:1].lower()
+        return reverse("books:detail-book", kwargs={"letter": letter, "slug": self.title.slug, "book_id": self.isbn})
+    
+    def delete_object(self):
+        letter = self.title.title[:1].lower()
+        return reverse('books:delete-book', kwargs={'letter':letter, 'slug':self.title.slug, "book_id": self.isbn})
     
     def __str__(self):
         return str(self.title)
@@ -60,6 +67,13 @@ class Book(models.Model):
             statuses = dict(STATUS_CHOICES)
             return statuses[self.rental_set.first().status] #the will be the most recent since the default sort order
         return False
+    
+    @property
+    def is_available(self):
+        if len(self.rental_set.all()) > 0:
+            status = self.rental_set.first().status
+            return True if status == '#1' else False
+        return True
     
     def save(self, *args, **kwargs):
         if not self.isbn:

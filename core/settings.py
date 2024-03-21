@@ -49,9 +49,24 @@ INSTALLED_APPS = [
     # 3rd party apps
     'django_countries',
     'import_export',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+    'widget_tweaks',
 ]
 
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+from shutil import which
+NPM_BIN_PATH = which("npm")
+# NPM_BIN_PATH = 'npm.cmd'
+
 MIDDLEWARE = [
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,6 +145,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static'),
+    # os.path.join(BASE_DIR,'books','static')   # sometimes needed, sometimes not
+]
+
+
+
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'

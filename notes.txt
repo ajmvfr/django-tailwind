@@ -11,9 +11,15 @@ create project
     pip install pillow
     pip install qrcode
     pip install django-import-export
+    pip install django-tailwind                         --https://django-tailwind.readthedocs.io/en/latest/installation.html
+        python manage.py tailwind init
+            app: leave as default theme
+    pip install django-browser-reload
+    pip install django-widget-tweaks
     pip install -r requirements.txt
     django-admin startproject core .    --the . says use current dir.  This allows us to not have the second dir like the default
-    
+    python manage.py tailwind install
+
 script for command terminal line to attach to virtuall enviroment
     .\venv\Scripts\activate.bat
 
@@ -22,6 +28,7 @@ deactivate virtual enviroment
 
 to start webserver
     python manage.py runserver
+    python manage.py tailwind start
 
 first step is to create api part of the poject
     python manage.py startapp authors

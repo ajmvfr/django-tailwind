@@ -2,9 +2,10 @@
 
 {% block title %}home{% endblock title %}
 
-{% block content%}
+{% block content %}
 {{obj.title}}
 <br>
+
 {% if qs %}
     <ul>
     {% for obj in qs %}

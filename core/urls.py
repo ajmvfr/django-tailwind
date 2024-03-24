@@ -10,7 +10,8 @@ urlpatterns = [
     path('', home_view, name='home'),
     path('switch/', change_theme, name='change'),   
     path('books/', include('books.urls',namespace='books')),
-    path('__reload__/', include('django_browser_reload.urls')),
+    path('rentals/', include('rentals.urls',namespace='rentals')),
+    path('__reload__/', include('django_browser_reload.urls')), #used for autoreload with django_browser_reload
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BookTitleListView, BookTitleDetailView, BookListView, BookDetailView, BookDeleteView
+from .views import BookTitleListView, BookTitleDetailView, BookDetailView, BookDeleteView #, BookListView
 
 app_name = 'books'
 

@@ -63,13 +63,13 @@ class BookTitleListView(FormView, ListView):
 
 #OPTION 1 - BOOK LIST VIEW +  overriding get_queryset method
 
-class BookListView(ListView):
-    template_name = 'books/detail.html'
-    paginate_by = 3
+# class BookListView(ListView):
+#     template_name = 'books/detail.html'
+#     paginate_by = 3
     
-    def get_queryset(self):
-        title_slug = self.kwargs.get('slug')
-        return Book.objects.filter(title__slug=title_slug) #book fc to booktitle, title__slug references book
+#     def get_queryset(self):
+#         title_slug = self.kwargs.get('slug')
+#         return Book.objects.filter(title__slug=title_slug) #book fc to booktitle, title__slug references book
 
 #OPTION 2 - BOOK TITLE DETAIL VIEW + model method
 class BookTitleDetailView(DetailView):

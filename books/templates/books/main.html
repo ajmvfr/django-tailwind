@@ -96,7 +96,9 @@
             {% endfor %}
         </ul>
     {% else %}
-        no book titles starting with <b>{{selected_letter}}</b>
+        <div>
+            no book titles starting with <b>{{selected_letter}}</b>
+        </div>
     {% endif %}
         
 {% endblock %}

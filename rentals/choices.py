@@ -4,3 +4,9 @@ STATUS_CHOICES = (
     ('#2','lost'),
     ('#3','delayed'),
 )
+
+FORMAT_CHOICE = (
+    ('#0','csv'),
+    ('#1','xls'),
+    ('#2','json'),
+)

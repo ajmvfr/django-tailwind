@@ -54,11 +54,11 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         letter = self.title.title[:1].lower()
-        return reverse("books:detail-book", kwargs={"letter": letter, "slug": self.title.slug, "book_id": self.isbn})
+        return reverse("books:detail-book", kwargs={"letter": letter, "slug": self.title.slug, "book_id": self.id})
     
     def delete_object(self):
         letter = self.title.title[:1].lower()
-        return reverse('books:delete-book', kwargs={'letter':letter, 'slug':self.title.slug, "book_id": self.isbn})
+        return reverse('books:delete-book', kwargs={'letter':letter, 'slug':self.title.slug, "book_id": self.id})
     
     def __str__(self):
         return str(self.title)
@@ -69,6 +69,12 @@ class Book(models.Model):
             statuses = dict(STATUS_CHOICES)
             return statuses[self.rental_set.first().status] #the will be the most recent since the default sort order
         return False
+    
+    @property
+    def rental_id(self):
+        if len(self.rental_set.all()) > 0:
+            return self.rental_set.first().id #the will be the most recent since the default sort order
+        return None
     
     @property
     def is_available(self):

@@ -1,0 +1,9 @@
+__pycache__
+venv/
+.env
+media/qr_codes/*.png
+db.sqlite3
+notes.txt
+run_migration.sh
+run_migrations.bat
+run_reset.bat
